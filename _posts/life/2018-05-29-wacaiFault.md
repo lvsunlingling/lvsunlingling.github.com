@@ -39,6 +39,6 @@ description:
 
 无人处的西湖角落,面试之后却颇有一番风味
 
-![西湖](../resources/2.jpg)
-![西湖](../resources/3.jpg)
-![西湖](../resources/4.jpg)
+![西湖]({site.url}}/assets/uploads/2.jpg)
+![西湖]({site.url}}/assets/uploads/3.jpg)
+![西湖]({site.url}}/assets/uploads/4.jpg)
