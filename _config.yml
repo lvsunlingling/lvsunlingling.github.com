@@ -5,7 +5,6 @@ description: > #刘康的技术博客
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "https://almostlie.github.io/" # the base hostname & protocol for your site
 # url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
-# twitter_username: coolnameismy@hotmail.com
 github_username:  almostlie
 
 # Build settings
@@ -21,7 +20,7 @@ title: 刘康的技术博客                             #自定义常量
 
 # avatar头像及Favicon
 avatar: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
-#favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+favicon: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
 
 locals:                                     #自定义常量
   tags: 标签
@@ -29,3 +28,18 @@ locals:                                     #自定义常量
 active: 技术                                 #自定义常量
 subscribe_rss: /pages/atom.xml              #订阅地址
 markdown: kramdown                         #markdown解释器
+
+# google analytics 设置
+#ga:
+#  id:
+#  url:
+#
+
+# baidu analytics 设置
+
+ba:
+  src: //hm.baidu.com/hm.js?22d94317cfb9f9e0bb476228d9f79278
+
+# disqus 设置
+disqus:
+  shortname: https-lavanille777-github-io
