@@ -1,27 +1,26 @@
 # Site settings
-title: 刘彦玮的技术博客
-email: coolnameismy@hotmail.com
-description: > #刘彦玮的技术博客
+title: 刘康的技术博客
+email: lkbycn1998@gmail.com
+description: > #刘康的技术博客
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://liuyanwei.jumppo.com" # the base hostname & protocol for your site
+url: "https://almostlie.github.io/" # the base hostname & protocol for your site
 # url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
-twitter_username: coolnameismy@hotmail.com
-github_username:  coolnameismy
+# twitter_username: coolnameismy@hotmail.com
+github_username:  almostlie
 
 # Build settings
 #markdown: kramdown
 permalink: /:year/:month/:day/:title.html   #博文的固定链接
 paginate: 10                                #分页时每页博文数量
 author:                                     #自定义常亮
-  name: 刘彦玮
-  email: coolnameismy@hotmail.com
-  link: http://liuyanwei.jumppo.com/
-  weibo: http://weibo.com/1897719834
-  github: http://github.com/coolnameismy
-title: 刘彦玮的技术博客                             #自定义常量
+  name: 刘康
+  email: lkbycn1998@gmail.com
+  link: https://almostlie.github.io/
+  github: https://github.com/almostlie
+title: 刘康的技术博客                             #自定义常量
 
 # avatar头像及Favicon
-avatar: https://avatars1.githubusercontent.com/u/5010799?v=3&amp;s=460
+avatar: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
 #favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
 
 locals:                                     #自定义常量
@@ -30,18 +29,3 @@ locals:                                     #自定义常量
 active: 技术                                 #自定义常量
 subscribe_rss: /pages/atom.xml              #订阅地址
 markdown: kramdown                         #markdown解释器
-
-# google analytics 设置
-#ga:
-#  id:
-#  url:
-#
-
-# baidu analytics 设置
-
-ba:
-  src: //hm.baidu.com/hm.js?22d94317cfb9f9e0bb476228d9f79278
-
-# disqus 设置
-disqus:
-  shortname: coolnameismy
