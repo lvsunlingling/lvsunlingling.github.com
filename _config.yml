@@ -20,7 +20,7 @@ title: 刘康的技术博客                             #自定义常量
 
 # avatar头像及Favicon
 avatar: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
-favicon: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
+#favicon: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
 
 locals:                                     #自定义常量
   tags: 标签
