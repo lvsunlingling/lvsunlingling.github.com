@@ -13,6 +13,5 @@ title: Welcome
 - 20岁
 - 普通二本大四在读
 - 找实习ING
-- [简历]({{site.url}}/assets/other/1.pdf)
 --- 
-
+[简历]({{site.url}}/assets/other/1.pdf)
