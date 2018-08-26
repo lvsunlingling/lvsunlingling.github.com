@@ -1,6 +1,6 @@
 ---
 layout: post
-title: java容器
+title: java-容器
 category: 学习
 tags: 
 description:
