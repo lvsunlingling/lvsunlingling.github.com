@@ -220,7 +220,7 @@ transient Node<E> last;
 ## HashMap
 
 ### put方法
-1. 对key做hash，然后再计算在桶的index;
+1. 对key做hash，然后再计算在桶的index;(高16bit不变,低16bit和高16bit做了一个异或,（n - 1） & hash --> 得到下标)
 2. 如果没碰撞直接放到bucket里；
 3. 如果碰撞了，以链表的形式存在buckets后；
 4. 链表过长转为红黑树
