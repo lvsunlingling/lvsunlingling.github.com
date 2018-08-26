@@ -1,7 +1,7 @@
 ---
 layout: post
 title: java容器
-category: 学习笔记
+category: 学习笔记
 tags: 
 description:
 ---
