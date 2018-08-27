@@ -11,24 +11,26 @@ description:
 
 ## 新建（New）
 
-创建后尚未启动。
+新创建了一个线程对象。,尚
 
 ## 可运行（Runnable）
 
-可能正在运行，也可能正在等待 CPU 时间片。
+线程对象创建后，其他线程(比如main线程）调用了该对象的start()方法。该状态的线程位于可运行线程池中，等待被线程调度选中，获取cpu 的使用权 
 
-包含了操作系统线程状态中的 Running 和 Ready。
+## 运行 (running)
 
-## 阻塞（Blocking）
+可运行状态(runnable)的线程获得了cpu 时间片（timeslice） ，执行程序代码。
 
-等待获取一个排它锁，如果其线程释放了锁就会结束此状态。
+## 阻塞(（block）
 
-## 无限期等待（Waiting）
+### 等待阻塞
+运行(running)的线程执行o.wait()方法，JVM会把该线程放入等待队列(waitting queue)中。
 
-等待其它线程显式地唤醒，否则不会被分配 CPU 时间片。
+### 同步阻塞
+运行(running)的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池(lock pool)中。
 
-| 进入方法 | 退出方法 |
-| --- | --- |
-| 没有设置 Timeout 参数的 Object.wait() 方法 | Object.notify() / Object.notifyAll() |
-| 没有设置 Timeout 参数的 Thread.join() 方法 | 被调用的线程执行完毕 |
-| LockSupport.park() 方法 | - |
+### 其他阻塞
+运行(running)的线程执行Thread.sleep(long ms)或t.join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入可运行(runnable)状态。
+
+## 死亡
+线程run()、main() 方法执行结束，或者因异常退出了run()方法，则该线程结束生命周期。死亡的线程不可再次复生。
