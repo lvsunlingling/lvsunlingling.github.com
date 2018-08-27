@@ -40,5 +40,6 @@ description:
 壹药网|hr挂||
 河马生鲜|二面凉||
 微创|offer|120/天|
-音智达|offer|100/天|
+early data|offer|100/天|
+阿基米德FM| 待定||
 

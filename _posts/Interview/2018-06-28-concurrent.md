@@ -7,7 +7,7 @@ description:
 ---
 
 # 线程状态的转换
-![线程状态]({{site.url}}/assets/image/interview/9.png)
+![线程状态]({{site.url}}/assets/image/interview/9.jpg)
 
 ## 新建（New）
 
