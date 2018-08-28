@@ -21,7 +21,7 @@ description:
 
 可运行状态(runnable)的线程获得了cpu 时间片（timeslice） ，执行程序代码。
 
-## 阻塞(（block）
+## 阻塞（block）
 
 ### 等待阻塞
 运行(running)的线程执行o.wait()方法，JVM会把该线程放入等待队列(waitting queue)中。
@@ -56,7 +56,7 @@ description:
 
 ### 四种线程池
 - newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程若无可回收，则新建线程。
-- ewFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+- newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
 - newsheduelthreadpool 创建一个定长线程池，按时间计划执行任务
 - newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
 
