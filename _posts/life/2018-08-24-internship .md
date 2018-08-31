@@ -41,5 +41,5 @@ description:
 河马生鲜|二面凉||
 微创|offer|120/天|
 early data|offer|100/天|
-阿基米德FM| 待定||
+阿基米德FM(python)| 一面挂||
 Micro Focus| offer|180/天|
