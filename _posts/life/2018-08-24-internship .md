@@ -27,6 +27,7 @@ description:
 
 面试公司| 面试情况  |薪资
 ------ | ------- | ------
+亚信| offer| 100/天|
 挖财| 一面凉| |
 魔方元| 一面凉| |
 上海时年| 笔试凉| |
@@ -42,4 +43,4 @@ description:
 微创|offer|120/天|
 early data|offer|100/天|
 阿基米德FM(python)| 一面挂||
-Micro Focus| offer|180/天|
+Micro Focus(HPE PPM)| offer|180/天|
