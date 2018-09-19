@@ -12,5 +12,6 @@ title: Welcome
 - 20岁
 - 普通二本大四在读
 - 某大数据营销公司在职实习生
+
 --- 
-[简历]({{site.url}}/assets/other/1.pdf)
+[^_^]: [简历]({{site.url}}/assets/other/1.pdf)
