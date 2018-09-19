@@ -44,3 +44,17 @@ description:
 early data|offer|100/天|
 阿基米德FM(python)| 一面挂||
 Micro Focus(HPE PPM)| offer|180/天|
+盛大汽车|offer|150/天|
+速锐|hr挂||
+海尔金融保理|offer|100/天|
+资易通|hr挂||
+易试互动|hr挂||
+安心记加班|二面挂||
+格尔软件|150/天||
+金融一账通|offer|3000/月|
+华夏信财|offer|150/天|
+HYPERS|offer||
+
+
+## 最后
+实习公司最终确定为 HYPERS
