@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 秋天来了
+title: 秋天来了
 category: 生活
 tags: 
 keywords: 
@@ -11,9 +11,9 @@ description:
 
 秋天真的来了
 
-和枕而卧,混沌中睡去
+和枕而卧,混沌中睡去
 
-片刻秋风未来
+片刻秋风未来
 
-再次燃烧
+再次燃烧
 
