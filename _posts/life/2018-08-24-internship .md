@@ -50,7 +50,7 @@ Micro Focus(HPE PPM)| offer|180/天|
 资易通|hr挂||
 易试互动|hr挂||
 安心记加班|二面挂||
-格尔软件|150/天||
+格尔软件|offer|150/天||
 金融一账通|offer|3000/月|
 华夏信财|offer|150/天|
 HYPERS|offer||
