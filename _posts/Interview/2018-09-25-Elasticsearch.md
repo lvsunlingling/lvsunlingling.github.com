@@ -58,7 +58,7 @@ http://localhost:5601/app/sense
 ```
 
 ### 交互
-命令:
+命令格式:
 
 ```
 curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
@@ -76,8 +76,6 @@ curl -XGET 'http://localhost:9200/_count?pretty' -d '
 '
 ```
 
-将返回:
-
 ```
 {
     "count" : 0,
@@ -90,6 +88,7 @@ curl -XGET 'http://localhost:9200/_count?pretty' -d '
 ```
 
 5.x后对排序，聚合这些操作用单独的数据结构(fielddata)缓存到内存里了，需要单独开启分析功能要打开
+
 ```
 curl -X PUT "localhost:9200/megacorp/_mapping/employee/" -H 'Content-Type: application/json' -d'
 {
@@ -128,8 +127,6 @@ Elasticsearch 尽可能地屏蔽了分布式系统的复杂性。这里列举了
 curl -X GET "localhost:9200/_cluster/health"
 ```
 
-得到
-
 ```
 {
    "cluster_name":          "elasticsearch",
@@ -145,7 +142,7 @@ curl -X GET "localhost:9200/_cluster/health"
 }
 ```
 
-#### status
+status
 - green 所有的主分片和副本分片都正常运行。
 - yellow 所有的主分片都正常运行，但不是所有的副本分片都正常运行。
 - red 有主分片没能正常运行。
