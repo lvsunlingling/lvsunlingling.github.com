@@ -288,7 +288,8 @@ curl -X GET "localhost:9200/_mget" -H 'Content-Type: application/json' -d'
 ```
 
 - 检索的数据都在相同的相同的_index内(甚至相同的 _type 中）拿数据
-```
+
+```
 curl -X GET "localhost:9200/website/blog/_mget" -H 'Content-Type: application/json' -d'
 {
    "docs" : [
@@ -331,6 +332,52 @@ curl -X POST "localhost:9200/website/blog/1/_update" -H 'Content-Type: applicati
 
 ```
 curl -X DELETE "localhost:9200/website/blog/123"
+```
+
+#### 代价较小的批量操作
+```
+curl -X POST "localhost:9200/_bulk" -H 'Content-Type: application/json' -d'
+{ "create": { "_index": "website", "_type": "blog", "_id": "123" }}
+{ "title":    "Cannot create - it already exists" }
+{ "index":  { "_index": "website", "_type": "blog", "_id": "123" }}
+{ "title":    "But we can update it" }
+'
+```
+
+失败结果:
+```
+{
+   "took": 3,
+   "errors": true, 
+   "items": [
+      {  "create": {
+            "_index":   "website",
+            "_type":    "blog",
+            "_id":      "123",
+            "status":   409, 
+            "error":    "DocumentAlreadyExistsException 
+                        [[website][4] [blog][123]:
+                        document already exists]"
+      }},
+      {  "index": {
+            "_index":   "website",
+            "_type":    "blog",
+            "_id":      "123",
+            "_version": 5,
+            "status":   200 
+      }}
+   ]
+}
+```
+
+复杂使用
+```
+curl -X POST "localhost:9200/website/log/_bulk" -H 'Content-Type: application/json' -d'
+{ "index": {}}
+{ "event": "User logged in" }
+{ "index": { "_type": "blog" }}
+{ "title": "Overriding the default type" }
+'
 ```
 
 ### 乐观并发控制
@@ -381,3 +428,5 @@ PUT /website/blog/2?version=10&version_type=external
   "created":  false
 }
 ```
+
+q
