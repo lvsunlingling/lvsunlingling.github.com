@@ -67,3 +67,10 @@ eg:(input)<k1,v1> 可能是偏移量和文本
 详见yarn
 
 ## WordCount功能之简单实现
+```
+mvn clean package -DskipTests
+
+scp wordcount.jar root@122.152.194.171:~/lib/
+
+hadoop jar /root/lib/wordcount.jar com.newcome.hadoop.mapreduce.WordCountApp hdfs://hadoop000:9000/hello.txt hdfs://hadoop000:9000/xw/
+```
