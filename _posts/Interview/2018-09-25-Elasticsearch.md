@@ -23,7 +23,7 @@ document的可以理解为一个JSON序列对象。每个document可包含多个
 - index 索引，即一系列documents的集合
 - shard 分片，ES是分布式搜索引擎，每个索引有一个或多个分片，索引的数据被分配到各个分片上，相当于一桶水用了N个杯子装。
 - replica 复制，可以理解为备份分片，相应地有primary shard（主分片）。
-- 文档 档  它是指最顶层或者根对象, 这个根对象被序列化成 JSON 并存储到 Elasticsearch 中，指定了唯一 ID。
+- 文档  它是指最顶层或者根对象, 这个根对象被序列化成 JSON 并存储到 Elasticsearch 中，指定了唯一 ID。
 ### 启动Elasticsearch
 
 1. 启动
@@ -207,3 +207,38 @@ Elastcisearch 是分布式的 文档 存储。它能存储和检索复杂的数�
 - _index 文档在哪存放
 - _type 文档表示的对象类别
 - _id 文档唯一标识
+- _version 版本号
+
+
+#### 读写
+发送
+```
+curl -X PUT "localhost:9200/website/blog/123" -H 'Content-Type: application/json' -d'
+{
+  "title": "My first blog entry",
+  "text":  "Just trying this out...",
+  "date":  "2014/01/01"
+}
+'
+```
+
+取回
+```
+#pretty能够让它格式化打印回来
+curl -X GET "localhost:9200/website/blog/123?pretty"
+```
+```
+#获取一部分
+curl -X GET "localhost:9200/website/blog/123?_source=title,text"
+```
+```
+#只要 _source字段
+curl -X GET "localhost:9200/website/blog/123/_source"
+```
+
+#### 检查文档是否存在
+```
+curl -i -XHEAD http://localhost:9200/website/blog/123
+```
+
+#### 
