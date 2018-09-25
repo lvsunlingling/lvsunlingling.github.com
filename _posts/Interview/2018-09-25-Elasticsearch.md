@@ -289,6 +289,7 @@ curl -X GET "localhost:9200/_mget" -H 'Content-Type: application/json' -d'
 
 - 检索的数据都在相同的相同的_index内(甚至相同的 _type 中）拿数据
 
+
 ```
 curl -X GET "localhost:9200/website/blog/_mget" -H 'Content-Type: application/json' -d'
 {
@@ -300,6 +301,7 @@ curl -X GET "localhost:9200/website/blog/_mget" -H 'Content-Type: application/js
 }
 '
 ```
+
 
 ```
 GET /website/blog/_mget
