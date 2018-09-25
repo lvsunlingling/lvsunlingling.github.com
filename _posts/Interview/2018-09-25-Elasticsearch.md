@@ -210,10 +210,9 @@ Elastcisearch 是分布式的 文档 存储。它能存储和检索复杂的数�
 - _version 版本号
 
 
-#### 读写
-发送
+#### 创建
 ```
-curl -X PUT "localhost:9200/website/blog/123" -H 'Content-Type: application/json' -d'
+curl -X POST "localhost:9200/website/blog" -H 'Content-Type: application/json' -d'
 {
   "title": "My first blog entry",
   "text":  "Just trying this out...",
@@ -222,23 +221,163 @@ curl -X PUT "localhost:9200/website/blog/123" -H 'Content-Type: application/json
 '
 ```
 
-取回
+为了解决id重复问题
+- PUT /website/blog/123?op_type=create
+- PUT /website/blog/123/_create
+
+如果冲突话返回一个
 ```
-#pretty能够让它格式化打印回来
+{
+   "error": {
+      "root_cause": [
+         {
+            "type": "document_already_exists_exception",
+            "reason": "[blog][123]: document already exists",
+            "shard": "0",
+            "index": "website"
+         }
+      ],
+      "type": "document_already_exists_exception",
+      "reason": "[blog][123]: document already exists",
+      "shard": "0",
+      "index": "website"
+   },
+   "status": 409
+}
+
+```
+#### 读取
+
+- pretty能够让它格式化打印回来
+
+```
 curl -X GET "localhost:9200/website/blog/123?pretty"
 ```
+
+- 获取一部分
+
 ```
-#获取一部分
 curl -X GET "localhost:9200/website/blog/123?_source=title,text"
 ```
+
+- 只要 _source字段
+
 ```
-#只要 _source字段
 curl -X GET "localhost:9200/website/blog/123/_source"
 ```
 
-#### 检查文档是否存在
+- 取得多个文档
 ```
-curl -i -XHEAD http://localhost:9200/website/blog/123
+curl -X GET "localhost:9200/_mget" -H 'Content-Type: application/json' -d'
+{
+   "docs" : [
+      {
+         "_index" : "website",
+         "_type" :  "blog",
+         "_id" :    2
+      },
+      {
+         "_index" : "website",
+         "_type" :  "pageviews",
+         "_id" :    1,
+         "_source": "views"
+      }
+   ]
+}
+'
 ```
 
-#### 
+- 检索的数据都在相同的相同的_index内(甚至相同的 _type 中）拿数据
+```
+curl -X GET "localhost:9200/website/blog/_mget" -H 'Content-Type: application/json' -d'
+{
+   "docs" : [
+      { "_id" : 2 },
+      # 单独请求覆盖值
+      { "_type" : "pageviews", "_id" :   1 }
+   ]
+}
+'
+```
+
+```
+GET /website/blog/_mget
+{
+   "ids" : [ "2", "1" ]
+}
+```
+
+#### 检查文档是否存在
+
+```
+curl -i -XHEAD "http://localhost:9200/website/blog/123"
+```
+
+#### 更新文档
+- put会更改掉整个文档
+- update修改 本质上还是替换
+```
+curl -X POST "localhost:9200/website/blog/1/_update" -H 'Content-Type: application/json' -d'
+{
+   "doc" : {
+      "tags" : [ "testing" ],
+      "views": 0
+   }
+}
+'
+```
+
+#### 删除文档
+
+```
+curl -X DELETE "localhost:9200/website/blog/123"
+```
+
+### 乐观并发控制
+#### 内部版本号
+Elasticsearch 使用这个 _version 号来确保变更以正确顺序得到执行. 如果该版本不是当前版本号，我们的请求将会失败。
+
+只有version = 1的时候才会执行
+
+```
+PUT /website/blog/1?version=1 
+{
+  "title": "My first blog entry",
+  "text":  "Starting to get the hang of this..."
+}
+
+```
+#### 外部版本号
+外部版本号的处理方式和我们之前讨论的内部版本号的处理方式有些不同， Elasticsearch 不是检查当前 _version 和请求中指定的版本号是否相同， 而是检查当前 _version 是否 小于 指定的版本号。 如果请求成功，外部的版本号作为文档的新 _version 进行存储。
+
+
+创建一个新的具有外部版本号 5 的博客文章
+```
+curl -X PUT "localhost:9200/website/blog/2?version=5&version_type=external" -H 'Content-Type: application/json' -d'
+{
+  "title": "My first external blog entry",
+  "text":  "Starting to get the hang of this..."
+}
+'
+```
+
+指定一个新的 version 号是 10 ：
+```
+PUT /website/blog/2?version=10&version_type=external
+{
+  "title": "My first external blog entry",
+  "text":  "This is a piece of cake..."
+}
+
+```
+
+请求成功并将当前 _version 设为 10 ：
+```
+{
+  "_index":   "website",
+  "_type":    "blog",
+  "_id":      "2",
+  "_version": 10,
+  "created":  false
+}
+```
