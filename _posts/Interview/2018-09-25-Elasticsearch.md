@@ -358,6 +358,23 @@ POST /website/blog/_mget
 ```
 ---
 
+#### 深度分页
+利用游标的方式
+```
+GET /old_index/_search?scroll=1m #时间被设置为一分钟
+{
+    "query": { "match_all": {}},
+    "sort" : ["_doc"], 
+    "size":  1000
+}
+
+GET /_search/scroll
+{
+    "scroll": "1m", 
+    "scroll_id" : "cXVlcnlUaGVuRmV0Y2g7NTsxMDk5NDpkUmpiR2FjOFNhNnlCM1ZDMWpWYnRROzEwOTk1OmRSamJHYWM4U2E2eUIzVkMxalZidFE7MTA5OTM6ZFJqYkdhYzhTYTZ5QjNWQzFqVmJ0UTsxMTE5MDpBVUtwN2lxc1FLZV8yRGVjWlI2QUVBOzEwOTk2OmRSamJHYWM4U2E2eUIzVkMxalZidFE7MDs="
+}
+```
+
 #### 代价较小的批量操作
 ```
 curl -X POST "localhost:9200/_bulk" -H 'Content-Type: application/json' -d'
@@ -578,6 +595,7 @@ int( (primary + number_of_replicas) / 2 ) + 1
 ### 多文档模式
 
 #### mget
+
 ![流程]({{site.url}}/assets/image/interview/22.png)
 
 - 客户端向 Node 1 发送 mget 请求。
@@ -592,4 +610,4 @@ int( (primary + number_of_replicas) / 2 ) + 1
 - 主分片一个接一个按顺序执行每个操作。当每个操作成功时，主分片并行转发新文档（或删除）到副本分片，然后执行下一个操作。 一旦所有的副本分片报告所有操作成功，该节点将向协调节点报告成功，协调节点将这些响应收集整理并返回给客户端。
 
 ## java API
-[github](http://www.jianshu.com)
+[github](https://github.com/almostlie/elasticDemo)
