@@ -89,9 +89,7 @@ discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
 ```
 
 2. 测试是否运行成功
-```
 
-```
 ```
 # pretty是格式化,默认显示节点信息
 curl 'http://localhost:9200/?pretty'
