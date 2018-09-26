@@ -10,21 +10,20 @@ description:
 
 Elasticsearch 是一个实时的分布式搜索分析引擎, 用作全文检索、结构化搜索、分析以及这三个功能的组合
 
-## 简单使用
-
-### 概念
+## 概念
 
 Relational DB ⇒ Databases ⇒ Tables ⇒ Rows ⇒ Columns
 
-Elasticsearch ⇒ Indices ⇒ Types ⇒ Documents ⇒ Fields
-
-document的可以理解为一个JSON序列对象。每个document可包含多个field。
+Elasticsearch ⇒ index ⇒ type ⇒ Document ⇒ field
+
+Elasticsearch ⇒ 索引 ⇒ 类型 ⇒ 文档
 
 - index 索引，即一系列documents的集合
+- document的可以理解为一个JSON序列对象。它是指最顶层或者根对象。每个document可包含多个field。
 - shard 分片，ES是分布式搜索引擎，每个索引有一个或多个分片，索引的数据被分配到各个分片上，相当于一桶水用了N个杯子装。
 - replica 复制，可以理解为备份分片，相应地有primary shard（主分片）。
-- 文档  它是指最顶层或者根对象, 这个根对象被序列化成 JSON 并存储到 Elasticsearch 中，指定了唯一 ID。
-### 启动Elasticsearch
+
+## 启动
 
 1. 启动
 ```
@@ -33,116 +32,138 @@ cd elasticsearch-<version>
 # -d可以作为守护进程使用
 ```
 
+2. github Head 插件安装
+```
+wget https://github.com/mobz/elasticsearch-head/archive/master.zip
+unzip xxx.zip
+npm install phantomjs-prebuilt@2.1.14 --ignore-scripts
+npm install
+npm run start
+```
+---
+修改 elasticsearch 解决跨域问题
+```
+vim config/elasticsearch.yml
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+```
+
+3. 分布式运行
+主节点
+```
+vim config/elasticsearch.yml
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+cluster.name: myCluster
+node.name: master
+node.master: true
+
+network.host: 127.0.0.1
+```
+--- 
+```
+vim config/elasticsearch.yml
+
+cluster.name: myCluster
+node.name: slave1
+
+network.host: 127.0.0.1
+http.port: 9201
+
+discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
+```
+---
+```
+vim config/elasticsearch.yml
+
+cluster.name: myCluster
+node.name: slave2
+
+network.host: 127.0.0.1
+http.port: 9202
+
+discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
+```
+
 2. 测试是否运行成功
+```
 
 ```
+```
+# pretty是格式化,默认显示节点信息
 curl 'http://localhost:9200/?pretty'
+# 或者访问 http://localhost:9100/
 ```
 
-```
-{
-  "name" : "yNNWst_",
-  "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "Q3T6MObuQRinowU6NiBLlg",
-  "version" : {
-    "number" : "5.5.1",
-    "build_hash" : "19c13d0",
-    "build_date" : "2017-07-18T20:44:24.823Z",
-    "build_snapshot" : false,
-    "lucene_version" : "6.6.0"
-  },
-  "tagline" : "You Know, for Search"
-}
-```
-
-这意味着已经运行了一个节点,一个集群是cluster_name相同的一组节点的实例
-可以在 **elasticsearch.yml**里面修改
-
-3. 可视化
-先下载kibana
-
-安装sense
-
-启动kibana并访问
-
-```
-http://localhost:5601/app/sense
-```
-
-### 交互
+## 基本用法
 命令格式:
-
 ```
 curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
 ```
 
-eg:计算集群中文档的数量
-
-```
-curl -XGET 'http://localhost:9200/_count?pretty' -d '
-{
-    "query": {
-        "match_all": {}
-    }
-}
-'
-```
-
-```
-{
-    "count" : 0,
-    "_shards" : {
-        "total" : 5,
-        "successful" : 5,
-        "failed" : 0
-    }
-}
-```
-
-5.x后对排序，聚合这些操作用单独的数据结构(fielddata)缓存到内存里了，需要单独开启分析功能要打开
-
-```
-curl -X PUT "localhost:9200/megacorp/_mapping/employee/" -H 'Content-Type: application/json' -d'
-{
-  "properties": {
-    "interests": { 
-      "type":     "text",
-      "fielddata": true
-    }
-  }
-}
-'
-```
-
-
-## 数据的输入与输出
-
-Elastcisearch 是分布式的 文档 存储。它能存储和检索复杂的数据结构--序列化成为JSON文档--以 实时 的方式。 换句话说，一旦一个文档被存储在 Elasticsearch 中，它就是可以被集群中的任意节点检索到。
+## 基本概念
 
 ### 文档元数据
-
 - _index 文档在哪存放
 - _type 文档表示的对象类别
 - _id 文档唯一标识
 - _version 版本号
 
-
-#### 创建
+## 增删改查
+### 索引创建
 ```
-curl -X POST "localhost:9200/website/blog" -H 'Content-Type: application/json' -d'
+PUT 127.0.0.1:9200/people
 {
-  "title": "My first blog entry",
-  "text":  "Just trying this out...",
-  "date":  "2014/01/01"
+	"settings":{
+		"number_of_shards":3,
+		"number_of_replicas":1
+	},
+	"mappings":{
+		"man":{
+			"properties":{
+				"name":{
+					"type":"text"
+				},
+				"country":{
+					"type":"keyword"
+				},
+				"age":{
+					"type":"integer"
+				},
+				"date":{
+					"type":"date",
+					"format":"yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+				}
+			}
+		}
+	}
 }
-'
 ```
 
-为了解决id重复问题
-- PUT /website/blog/123?op_type=create
-- PUT /website/blog/123/_create
+### 插入
+PUT/POST 127.0.0.1:9200/people/man/1
+```
+{
+  "name": "ss newcome",
+  "country":  "newcome",
+  "age":  "28",
+  "data": "2014/01/01"
+}
+```
 
-如果冲突话返回一个
+--- 
+为了解决id冲突问题
+```
+PUT /website/blog/123?op_type=create
+# 或者
+PUT /website/blog/123/_create
+```
+
+_create如果冲突话返回一个
+
 ```
 {
    "error": {
@@ -161,96 +182,181 @@ curl -X POST "localhost:9200/website/blog" -H 'Content-Type: application/json' -
    },
    "status": 409
 }
-
-```
-#### 读取
-
-- pretty能够让它格式化打印回来
-
-```
-curl -X GET "localhost:9200/website/blog/123?pretty"
 ```
 
-- 获取一部分
-
+### 修改
+本质上还是替换
 ```
-curl -X GET "localhost:9200/website/blog/123?_source=title,text"
-```
-
-- 只要 _source字段
-
-```
-curl -X GET "localhost:9200/website/blog/123/_source"
-```
-
-- 取得多个文档
-```
-curl -X GET "localhost:9200/_mget" -H 'Content-Type: application/json' -d'
+POST 127.0.0.1:9200/people/man/1/_update
 {
-   "docs" : [
-      {
-         "_index" : "website",
-         "_type" :  "blog",
-         "_id" :    2
-      },
-      {
-         "_index" : "website",
-         "_type" :  "pageviews",
-         "_id" :    1,
-         "_source": "views"
+	"doc":{
+		"name":"谁是newcome"
+	}
+}
+```
+---
+```
+POST 127.0.0.1:9200/people/man/1/_update
+{
+	"script": {
+		"lang": "painless",
+		"inline": "ctx._source.age = params.age",
+		"params": {
+			"age": 100
+		}
+	}
+}
+```
+
+
+### 删除
+```
+DELETE 27.0.0.1:9200/people/man/1
+```
+
+
+### 查询
+
+#### 简单查询
+```
+GET 127.0.0.1:9200/people/man/1
+
+# 检查文档是否存在
+HEAD "http://localhost:9200/people/man/1"
+```
+---
+- term不会分词
+- match会分词
+- match_phrase可以查找分析字段
+```
+# 没有_search不会显示字段hits
+post 127.0.0.1:9200/people/_search
+{
+    "query": {
+        <!-- "match_all": {} -->
+        <!-- match_phrase -->
+        "match":{
+          "name": "newcome"
+        }
+    },
+    <!-- 只要name和age字段  -->
+    "_source": [ "name", "age" ],
+    "sort": [
+    	{"data": {"order": "desc"}}
+    ],
+    "from":1,
+    "size":5
+}
+```
+---
+```
+# 根据 author title查询
+post 127.0.0.1:9200/people/_search
+{
+    "query": {
+      "match":{
+          "query": "newcome",
+          "fields": ["author", "title"]
+        }
+    }
+}
+```
+---
+and or
+```
+post 127.0.0.1:9200/people/_search
+{
+    "query": {
+      "query_string":{
+          "query": "李白 AND 杜普",
+          "fields": ["author", "title"]
+        }
+    }
+}
+```
+
+#### 结构化查询
+匹配字数为1000的书
+```
+{
+    "query": {
+      "term": {
+        "word_count": 1000;
       }
-   ]
+    }
 }
-'
 ```
-
-- 检索的数据都在相同的相同的_index内(甚至相同的 _type 中）拿数据
-
-
+匹配年龄在10到20之间
 ```
-curl -X GET "localhost:9200/website/blog/_mget" -H 'Content-Type: application/json' -d'
 {
-   "docs" : [
-      { "_id" : 2 },
-      # 单独请求覆盖值
-      { "_type" : "pageviews", "_id" :   1 }
-   ]
+    "query": {
+      "range": {
+        "age": {
+          "gte": 10,
+          "lte": 20 
+        }
+      }
+    }
 }
-'
 ```
 
+#### filter
+只关注结果是不是 结果会被缓存
+{
+  "query": {
+    "bool": {
+      "must": {
+          "match": {
+            "gender": "F"
+          }
+      },
+      "filter": {
+        "term": {
+          "word_count": 1000
+        }
+      }
+    }
+  }
+}
+
+
+#### 聚合查询
+分别根据age和date聚合
 ```
-GET /website/blog/_mget
+{
+	"aggs":{
+		"group_by_word_count": {
+			"terms":{
+				"field": "age"
+			}
+		},
+		"group_by_date": {
+			"terms":{
+				"field": "data"
+			}
+		}
+	}
+}
+```
+
+#### 组数据
+
+```
+POSY /website/blog/_mget
 {
    "ids" : [ "2", "1" ]
 }
 ```
 
-#### 检查文档是否存在
-
 ```
-curl -i -XHEAD "http://localhost:9200/website/blog/123"
+POST /website/blog/_mget
+  "docs" : [
+    { "_id" : 2 },
+    # 单独请求覆盖值
+    { "_type" : "pageviews", "_id" :   1 }
+  ]
 ```
-
-#### 更新文档
-- put会更改掉整个文档
-- update修改 本质上还是替换
-```
-curl -X POST "localhost:9200/website/blog/1/_update" -H 'Content-Type: application/json' -d'
-{
-   "doc" : {
-      "tags" : [ "testing" ],
-      "views": 0
-   }
-}
-'
-```
-
-#### 删除文档
-
-```
-curl -X DELETE "localhost:9200/website/blog/123"
-```
+---
 
 #### 代价较小的批量操作
 ```
@@ -298,8 +404,8 @@ curl -X POST "localhost:9200/website/log/_bulk" -H 'Content-Type: application/js
 '
 ```
 
-### 乐观并发控制
-#### 内部版本号
+## 乐观并发控制
+### 内部版本号
 Elasticsearch 使用这个 _version 号来确保变更以正确顺序得到执行. 如果该版本不是当前版本号，我们的请求将会失败。
 
 只有version = 1的时候才会执行
@@ -312,7 +418,7 @@ PUT /website/blog/1?version=1
 }
 
 ```
-#### 外部版本号
+### 外部版本号
 外部版本号的处理方式和我们之前讨论的内部版本号的处理方式有些不同， Elasticsearch 不是检查当前 _version 和请求中指定的版本号是否相同， 而是检查当前 _version 是否 小于 指定的版本号。 如果请求成功，外部的版本号作为文档的新 _version 进行存储。
 
 
@@ -347,15 +453,15 @@ PUT /website/blog/2?version=10&version_type=external
 }
 ```
 
-## 分布式特性
+## 集群
+
+### 分布式特性
 Elasticsearch 尽可能地屏蔽了分布式系统的复杂性。这里列举了一些在后台自动执行的操作
 - 分配文档到不同的容器 或 分片 中，文档可以储存在一个或多个节点中
 - 按集群节点来均衡分配这些分片，从而对索引和搜索过程进行负载均衡
 - 复制每个分片以支持数据冗余，从而防止硬件故障导致的数据丢失
 - 将集群中任一节点的请求路由到存有相关数据的节点
 - 集群扩容时无缝整合新节点，重新分配分片以便从离群节点恢复
-
-## 集群
 
 ### 集群介绍
 一个单独的节点，里面不包含任何的数据和索引,叫做空集群
@@ -484,3 +590,6 @@ int( (primary + number_of_replicas) / 2 ) + 1
 - 客户端向 Node 1 发送 bulk 请求。
 - Node 1 为每个节点创建一个批量请求，并将这些请求并行转发到每个包含主分片的节点主机。
 - 主分片一个接一个按顺序执行每个操作。当每个操作成功时，主分片并行转发新文档（或删除）到副本分片，然后执行下一个操作。 一旦所有的副本分片报告所有操作成功，该节点将向协调节点报告成功，协调节点将这些响应收集整理并返回给客户端。
+
+## java API
+[github](http://www.jianshu.com)
