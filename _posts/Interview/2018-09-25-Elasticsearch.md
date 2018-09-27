@@ -50,8 +50,8 @@ http.cors.enabled: true
 http.cors.allow-origin: "*"
 ```
 
-3. 分布式运行
-主节点
+3. 分布式运行主节点
+
 ```
 vim config/elasticsearch.yml
 
