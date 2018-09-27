@@ -33,6 +33,7 @@ cd elasticsearch-<version>
 ```
 
 2. github Head 插件安装
+
 ```
 wget https://github.com/mobz/elasticsearch-head/archive/master.zip
 unzip xxx.zip
@@ -225,6 +226,7 @@ HEAD "http://localhost:9200/people/man/1"
 ---
 - term不会分词
 - match会分词
+- bool 联合查询 看情况
 - match_phrase可以查找分析字段
 ```
 # 没有_search不会显示字段hits
@@ -272,6 +274,32 @@ post 127.0.0.1:9200/people/_search
     }
 }
 ```
+---
+bool查询
+- must	子句（查询）必须出现在匹配的文档中，并将有助于得分。
+- filter	子句（查询）必须出现在匹配的文档中。 然而不像 must 此查询的分数将被忽略。
+- should	子句（查询）应出现在匹配文档中。 在布尔查询中不包含 must 或 filter 子句，一个或多个should 子句必须有相匹配的文件。 匹配 should 条件的最小数目可通过设置minimum_should_match 参数。
+- must_not	子句（查询）不能出现在匹配的文档中。
+
+```
+只关注结果是不是 结果会被缓存
+{
+  "query": {
+    "bool": {
+      "must": {
+          "match": {
+            "gender": "F"
+          }
+      },
+      "filter": {
+        "term": {
+          "word_count": 1000
+        }
+      }
+    }
+  }
+}
+```
 
 #### 结构化查询
 匹配字数为1000的书
@@ -297,26 +325,6 @@ post 127.0.0.1:9200/people/_search
     }
 }
 ```
-
-#### filter
-只关注结果是不是 结果会被缓存
-{
-  "query": {
-    "bool": {
-      "must": {
-          "match": {
-            "gender": "F"
-          }
-      },
-      "filter": {
-        "term": {
-          "word_count": 1000
-        }
-      }
-    }
-  }
-}
-
 
 #### 聚合查询
 分别根据age和date聚合
