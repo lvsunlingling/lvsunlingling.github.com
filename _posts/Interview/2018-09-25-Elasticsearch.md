@@ -99,6 +99,7 @@ curl 'http://localhost:9200/?pretty'
 
 ## 基本用法
 命令格式:
+
 ```
 curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
 ```
@@ -113,6 +114,7 @@ curl -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'
 
 ## 增删改查
 ### 索引创建
+
 ```
 PUT 127.0.0.1:9200/people
 {
@@ -144,6 +146,7 @@ PUT 127.0.0.1:9200/people
 
 ### 插入
 PUT/POST 127.0.0.1:9200/people/man/1
+
 ```
 {
   "name": "ss newcome",
@@ -155,6 +158,7 @@ PUT/POST 127.0.0.1:9200/people/man/1
 
 --- 
 为了解决id冲突问题
+
 ```
 PUT /website/blog/123?op_type=create
 # 或者
@@ -185,6 +189,7 @@ _create如果冲突话返回一个
 
 ### 修改
 本质上还是替换
+
 ```
 POST 127.0.0.1:9200/people/man/1/_update
 {
@@ -209,6 +214,7 @@ POST 127.0.0.1:9200/people/man/1/_update
 
 
 ### 删除
+
 ```
 DELETE 27.0.0.1:9200/people/man/1
 ```
@@ -217,11 +223,13 @@ DELETE 27.0.0.1:9200/people/man/1
 ### 查询
 
 #### 简单查询
+
 ```
 GET 127.0.0.1:9200/people/man/1
 
 # 检查文档是否存在
 HEAD "http://localhost:9200/people/man/1"
+
 ```
 ---
 - term不会分词
@@ -263,6 +271,7 @@ post 127.0.0.1:9200/people/_search
 ```
 ---
 and or
+
 ```
 post 127.0.0.1:9200/people/_search
 {
