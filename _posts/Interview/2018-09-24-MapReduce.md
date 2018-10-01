@@ -126,3 +126,29 @@ vim yarn-site.xml
 #停止：在hadoop/sbin/目录下执行  
 ./mr-jobhistory-daemon.sh stop historyserver
 ```
+
+## hadoop分布式环境搭建
+vim hdfs-site.xml
+```
+   <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+    </property>
+```
+
+vim yarn-site.xml
+```
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop000</value>
+    </property>
+```
+
+vim slaves
+```
+hadoop000
+hadoop001
+hadoop002
+```
+
+其余一切与单机相同,基本对于用户是透明的
