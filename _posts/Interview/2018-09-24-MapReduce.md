@@ -128,6 +128,14 @@ vim yarn-site.xml
 ```
 
 ## hadoop分布式环境搭建
+ssh免密码
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop000
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop001
+ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop002
+```
+
+
 vim hdfs-site.xml
 ```
    <property>
