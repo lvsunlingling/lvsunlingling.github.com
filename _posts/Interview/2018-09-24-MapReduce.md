@@ -67,7 +67,7 @@ eg:(input)<k1,v1> 可能是偏移量和文本
 
 ### 代码
 
-![javaDemo](https://github.com/almostlie/hadooptrain)
+[javaDemo](https://github.com/almostlie/hadooptrain)
 
 ### 打包
 ```
