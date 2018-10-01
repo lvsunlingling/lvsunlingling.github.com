@@ -15,8 +15,6 @@ description:
 ### 流程
 ![MapReduce流程]({{site.url}}/assets/image/interview/16.jpg)
 
-![MapReduce详细流程]({{site.url}}/assets/image/interview/17.png)
-
 ```
 (input) <k1, v1> -> map -> <k2, v2> -> combine -> <k2, v2> -> reduce -> <k3, v3> (output)
 
@@ -30,17 +28,16 @@ eg:(input)<k1,v1> 可能是偏移量和文本
 
 - Split: 交有由MapReduce处理的数据块,是MapReduce最小的计算单元
 - blocksize: 是HDFS中的最小数据单元(128m),一般和Split一一对应
-
 - InputFormat: 将我们的数据进行分片(split)
-
 - OutputFormat: 输出
+- Combiner : Combiner是一个“迷你reduce”过程，它只处理单台机器生成的数据。(只能使用求和,次数)不能使用平均数
 
-- Combiner
-
-- Patitioner
+- Patitioner 对map作hash,交由不同的的job处理
+![Combiner AND Patitioner]({{site.url}}/assets/image/interview/24.jpg)
 
 ### 1.x架构
 ![MapReduce详细流程]({{site.url}}/assets/image/interview/17.png)
+
 #### JobTracker:JT
 - 作业的管理者
 - 将作业分解成一堆任务:Task(MapTask和ReduceTask)
@@ -67,10 +64,65 @@ eg:(input)<k1,v1> 可能是偏移量和文本
 详见yarn
 
 ## WordCount功能之简单实现
+
+### 代码
+
+![javaDemo](https://github.com/almostlie/hadooptrain)
+
+### 打包
 ```
 mvn clean package -DskipTests
 
 scp wordcount.jar root@122.152.194.171:~/lib/
 
-hadoop jar /root/lib/wordcount.jar com.newcome.hadoop.mapreduce.WordCountApp hdfs://hadoop000:9000/hello.txt hdfs://hadoop000:9000/xw/
+/Users/newcome/development/env/hadoop-2.6.0-cdh5.7.0/bin/hadoop jar ~/Desktop/wordCount.jar com.newcome.hadoop.mapreduce.WordCountApp hdfs://newcome:8020/i.txt hdfs://newcome:8020/xw/
+
+/Users/newcome/development/env/hadoop-2.6.0-cdh5.7.0/bin/hadoop jar ~/Desktop/demo.jar com.newcome.hadoop.mapreduce.PhoneCountApp hdfs://newcome:8020/phone.txt hdfs://newcome:8020/phone/
+```
+
+### 配置jobHistory
+
+vim mapred-site.xml
+```
+<!-- 设置jobhistoryserver 没有配置的话 history入口不可用 -->
+<property>
+    <name>mapreduce.jobhistory.address</name>
+    <value>newcome:10020</value>
+</property>
+
+<!-- 配置web端口 -->
+<property>
+    <name>mapreduce.jobhistory.webapp.address</name>
+    <value>newcome:19888</value>
+</property>
+
+<!-- 配置正在运行中的日志在hdfs上的存放路径 -->
+<property>
+    <name>mapreduce.jobhistory.intermediate-done-dir</name>
+    <value>/history/done_intermediate</value>
+</property>
+
+<!-- 配置运行过的日志存放在hdfs上的存放路径 -->
+<property>
+    <name>mapreduce.jobhistory.done-dir</name>
+    <value>/history/done</value>
+</property>
+
+
+```
+
+vim yarn-site.xml
+```
+<!-- 开启日志聚合 -->
+<property>
+<name>yarn.log-aggregation-enable</name>
+<value>true</value>
+</property>
+```
+
+```
+#启动： 在hadoop/sbin/目录下执行  
+./mr-jobhistory-daemon.sh start historyserver
+#停止：在hadoop/sbin/目录下执行  
+./mr-jobhistory-daemon.sh stop historyserver
 ```
