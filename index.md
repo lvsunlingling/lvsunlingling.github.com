@@ -11,7 +11,13 @@ title: Welcome
 - male
 - 20 years old
 - bachelor degree senior student
-- Big Data marketing company intern
+
+
+## work experience
+- Big Data marketing company intern ING
+
+## Contact information
+- Email lkbycn1998@gmail.com
 
 --- 
 [^_^]: [resume]({{site.url}}/assets/other/1.pdf)
