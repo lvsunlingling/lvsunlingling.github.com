@@ -6,17 +6,23 @@ title: Welcome
 ## Welcome to my personal blog
 
 ## about me
-
 - newcome
-- male
-- 20 years old
-- bachelor degree senior student
+- shanghai
+
+### my faith
+Be the person i want to be, then do what i should do.
+
+### my interest
+- think 
+- sleep 
+- game 
+- anime
 
 
-## work experience
+### work experience
 - Big Data marketing company intern ING
 
-## Contact information
+### Contact information
 - Email lkbycn1998@gmail.com
 
 --- 
