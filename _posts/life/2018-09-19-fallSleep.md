@@ -17,7 +17,7 @@ Lazy and lying,Sleeping very deep
 
 Time is to October 
 
-Wake up in the phone
+was jarred awake by the ringing telephone
 
 Withdrew the train ticket
 
