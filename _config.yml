@@ -28,7 +28,3 @@ locals:                                     #自定义常量
 active: 技术                                 #自定义常量
 subscribe_rss: /pages/atom.xml              #订阅地址
 markdown: kramdown                         #markdown解释器
-
-# disqus 设置
-disqus:
-  shortname: newcomeblog
