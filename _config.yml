@@ -1,5 +1,5 @@
 # Site settings
-title: 刘康的技术博客
+title: newcome personal blog 
 email: lkbycn1998@gmail.com
 description: > #刘康的技术博客
 baseurl: "" # the subpath of your site, e.g. /blog/
@@ -12,11 +12,11 @@ github_username:  almostlie
 permalink: /:year/:month/:day/:title.html   #博文的固定链接
 paginate: 10                                #分页时每页博文数量
 author:                                     #自定义常亮
-  name: 刘康
+  name: newcome
   email: lkbycn1998@gmail.com
   link: https://almostlie.github.io/
   github: https://github.com/almostlie
-title: 刘康的技术博客                             #自定义常量
+title:  newcome personal blog                            
 
 # avatar头像及Favicon
 avatar: https://avatars3.githubusercontent.com/u/26787763?s=460&v=4
