@@ -7,7 +7,7 @@ title: Welcome
 
 ## about me
 
-- 刘康/newcome
+- newcome
 - male
 - 20 years old
 - bachelor degree senior student
