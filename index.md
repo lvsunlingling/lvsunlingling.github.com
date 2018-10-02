@@ -23,7 +23,7 @@ Be the person i want to be, then do what i should do.
 - Big Data marketing company intern ING
 
 ### Contact information
-- Email lkbycn1998@gmail.com
+- mail lkbycn1998@gmail.com
 
 --- 
 [^_^]: [resume]({{site.url}}/assets/other/1.pdf)
