@@ -18,7 +18,6 @@ Be the person i want to be, then do what i should do.
 - game 
 - anime
 
-
 ### work experience
 - Big Data marketing company intern ing
 
