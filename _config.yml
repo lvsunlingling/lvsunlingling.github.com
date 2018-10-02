@@ -29,12 +29,6 @@ active: 技术                                 #自定义常量
 subscribe_rss: /pages/atom.xml              #订阅地址
 markdown: kramdown                         #markdown解释器
 
-# google analytics 设置
-#ga:
-#  id:
-#  url:
-#
-
 # disqus 设置
 disqus:
   shortname: newcomeblog
