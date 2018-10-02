@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 秋天来了
-category: 生活
+category: life
 tags: 
 keywords: 
 description:

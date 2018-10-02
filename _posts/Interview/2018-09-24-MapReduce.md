@@ -1,7 +1,7 @@
 ---
 layout: post
 title: hadoop-MapReduce
-category: 学习
+category: study
 tags: 
 description:
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 找实习总结
-category: 生活
+category: life
 tags: 面试
 keywords: 面试
 description:

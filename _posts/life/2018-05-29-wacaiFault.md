@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 挖财一面凉经
-category: 生活
+category: life
 tags: 面试
 keywords: 面试,挖财
 description:

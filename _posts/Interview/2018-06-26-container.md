@@ -1,7 +1,7 @@
 ---
 layout: post
 title: java-容器
-category: 学习
+category: study
 tags: 
 description:
 ---

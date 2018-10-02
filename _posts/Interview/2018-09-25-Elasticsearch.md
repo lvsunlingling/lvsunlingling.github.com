@@ -1,7 +1,7 @@
 ---
 layout: post
 title: luncene-Elasticsearch
-category: 学习
+category: study
 tags: 
 description:
 ---
