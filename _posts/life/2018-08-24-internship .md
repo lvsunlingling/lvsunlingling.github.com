@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 找实习总结
+title: Looking for an internship summary
 category: life
 tags: 面试
 keywords: 面试
