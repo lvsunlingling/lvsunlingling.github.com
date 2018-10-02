@@ -7,7 +7,7 @@ title: Welcome
 
 ## about me
 - newcome
-- shanghai
+- Shanghai
 
 ### my faith
 Be the person i want to be, then do what i should do.
