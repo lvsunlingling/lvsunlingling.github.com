@@ -19,7 +19,7 @@ Time is to October
 
 was jarred awake by the ringing telephone
 
-Withdrew the train ticket
+Hesitating to the last second, Withdrew the train ticket
 
 be sick at heart
 
