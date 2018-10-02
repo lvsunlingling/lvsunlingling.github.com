@@ -53,8 +53,8 @@ Micro Focus(HPE PPM)| offer|180/天|
 格尔软件|offer|150/天||
 金融一账通|offer|3000/月|
 华夏信财|offer|150/天|
-HYPERS|offer||
+Big Data marketing company|offer||
 
 
 ## 最后
-实习公司最终确定为 HYPERS
+实习公司最终确定为 Big Data marketing company
