@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 挖财一面凉经
+title: First interview failed
 category: life
 tags: 面试
 keywords: 面试,挖财
