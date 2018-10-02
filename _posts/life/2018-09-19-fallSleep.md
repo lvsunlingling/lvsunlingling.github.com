@@ -8,17 +8,21 @@ description:
 ---
 
 
-明明很饿,却吃不下去饭
+Obviously very hungry,But no appetite
 
-秋天真的来了
+Autumn is really coming
 
-和枕而卧,混沌中睡去
+After seeing the message
 
-喧闹中惊醒
+Lazy and lying,Sleeping very deep
 
-退掉了回程的火车票
+Time is to October 
 
-心是真的有些痛了
+Wake up in the phone
+
+Withdrew the train ticket
+
+be sick at heart
 
 
 
