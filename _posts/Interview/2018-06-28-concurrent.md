@@ -1,6 +1,6 @@
 ---
 layout: post
-title: java-并发
+title: java-concurrent
 category: study
 tags: 
 description:
