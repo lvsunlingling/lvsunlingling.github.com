@@ -21,7 +21,7 @@ was jarred awake by the ringing telephone
 
 Hesitating to the last second, Withdrew the train ticket
 
-be sick at heart
+be sick at my heart
 
 
 
