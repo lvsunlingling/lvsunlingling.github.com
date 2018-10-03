@@ -1,9 +1,7 @@
 ---
 layout: post
-title: Welcome
+title: Welcome to my personal blog
 ---
-
-## Welcome to my personal blog
 
 ## about me
 
