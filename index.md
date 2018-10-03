@@ -6,11 +6,10 @@ title: Welcome to my personal blog
 ## about me
 
 ### Base
-- newcome
 - Shanghai
 
 ### my faith
-Be the person i want to be, then do what i should do.
+- Be the person i want to be, then do what i should do.
 
 ### my interest
 - think 
