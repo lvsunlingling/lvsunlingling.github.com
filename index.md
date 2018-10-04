@@ -9,7 +9,7 @@ title: Welcome to my personal blog
 - Shanghai
 
 ### my faith
-- be what I want to be ＆ do what I want to do
+- First of all , be what I want to be . Then do what I want to do
 
 ### my interest
 - think 
