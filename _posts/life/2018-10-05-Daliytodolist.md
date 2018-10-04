@@ -13,9 +13,9 @@ I really admire my leader about plan, he has been sticking to the four-year plan
 Any success is not accidental.
 now my plan begins.
 
-2018-10-05
-Run company demo notifications, and Refactor it
-Keep 1 hours
-Study DFS algorithm
-Bind Company email to phone
+### 2018-10-05
+- Run company demo notifications, and Refactor it
+- Keep 
+- Study DFS algorithm
+- Bind Company email to phone
 
