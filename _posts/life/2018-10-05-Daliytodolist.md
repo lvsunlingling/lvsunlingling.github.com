@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Daliy Todo List
