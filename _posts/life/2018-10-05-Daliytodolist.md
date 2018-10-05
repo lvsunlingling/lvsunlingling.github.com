@@ -14,7 +14,7 @@ Any success is not accidental.
 now my plan begins.
 
 ### 2018-10-05
-- Run company demo notifications, and Refactor it
+- Run company demo notifications, and refactor it
 - Keep 
 - Study DFS algorithm
 - Bind Company email to phone
