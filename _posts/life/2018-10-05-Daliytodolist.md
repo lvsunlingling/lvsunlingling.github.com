@@ -11,7 +11,7 @@ In my life, I have achieved great success twice by my own efforts. Now I think a
 When I wrote this sentence, I have not planned for a long time.
 I really admire my leader about plan, he has been sticking to the four-year plan.
 Any success is not accidental.
-now my plan begins.
+now my plan begin.
 
 ### 2018-10-05
 - Run company demo notifications, and refactor it
@@ -19,8 +19,11 @@ now my plan begins.
 - Bind Company email to phone
 
 
-### 2018-10-06
+### 2018-10-07
 - Refactor notifications
 - Study DFS algorithm
+- Copy file
+- Cut hair
 - Learning distributed transactions a little
 - Keep
+- about thinking
