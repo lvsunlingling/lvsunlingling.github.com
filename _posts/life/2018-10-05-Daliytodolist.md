@@ -16,6 +16,11 @@ now my plan begins.
 ### 2018-10-05
 - Run company demo notifications, and refactor it
 - Keep 
-- Study DFS algorithm
 - Bind Company email to phone
 
+
+### 2018-10-06
+- Refactor notifications
+- Study DFS algorithm
+- Learning distributed transactions a little
+- Keep
