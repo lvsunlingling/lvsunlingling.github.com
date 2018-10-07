@@ -21,9 +21,11 @@ now my plan begin.
 
 ### 2018-10-07
 - Refactor notifications
-- Study DFS algorithm
 - Copy file
-- Cut hair
 - Learning distributed transactions a little
 - Keep
 - about thinking
+
+### 2018-10-08
+- Study DFS algorithm
+- notifications bussinis
