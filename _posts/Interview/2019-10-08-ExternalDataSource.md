@@ -9,7 +9,8 @@ description:
 ## 写到文件
 
 ### 代码
-```
+
+```scala
     val spark = SparkSession.builder().appName("SparkSessionApp").master("local[2]").getOrCreate()
     val peopleDF = spark.read.json("file:///Users/newcome/development/devtmp/people")
     peopleDF.show()
@@ -17,7 +18,8 @@ description:
     spark.stop()
 ```
 ### sparkSQL
-```
+
+```scala
 CREATE TEMPORARY VIEW parquetTable
 USING org.apache.spark.sql.parquet
 OPTIONS (
@@ -25,11 +27,15 @@ OPTIONS (
 )
 ```
 
-## 写到hive
+## write to shive
+
+```scala
 spark.sql("select * from emp").write.saveAsTable("table1")
+```
 注意设置spark.sql.shuffle.patitions为200
 
 ## mysql
+
 ```scala
 // Note: JDBC loading and saving can be achieved via either the load/save or jdbc methods
 // Loading data from a JDBC source
@@ -66,5 +72,5 @@ jdbcDF.write
 ```
 
 
-## 两个数据库下的数据操作
+## Cross-database operation
 val resultDF = hiveDF.join(mysqlDF,hiveDF.col("name") === mysqlDF.col("name"),"inner").show()
