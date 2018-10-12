@@ -73,4 +73,7 @@ jdbcDF.write
 
 
 ## Cross-database operation
+
+```
 val resultDF = hiveDF.join(mysqlDF,hiveDF.col("name") === mysqlDF.col("name"),"inner").show()
+```
