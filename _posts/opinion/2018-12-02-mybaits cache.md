@@ -217,4 +217,4 @@ BaseExcuter.java
 ```
 
 - 读与写都放在同一个锁里面即可。例如我从读数据开始即上锁，然后更新或者插入的实务提交之后，才释放锁，别的线程才可以做读写操作
-- mybatis cache plugin(
+- mybatis cache plugin
