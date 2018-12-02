@@ -7,6 +7,7 @@ description:
 ---
 
 ## concept
+
 > 在开发中,我们经常用Hibernate(jpa)和Mybaits等orm框架帮助我们迅速进行增删查改等操作,像mybaits3和Hibernate的一级缓存是默认开启,很容易造成开发上的一些问题,比如引起脏数据等问题
 
 MyBatis的缓存分为一级缓存和二级缓存，两种缓存的缓存粒度是一样的，都是对应一条sql查询语句，但是二者的生命周期是不一样的，一级缓存的生命周期是SqlSession对象的使用期间，随着SqlSession对象的死亡而消失；二级缓存的生命周期是同MyBatis应用一样长
@@ -20,7 +21,8 @@ MyBatis的缓存分为一级缓存和二级缓存，两种缓存的缓存粒度�
 ### Executor 
 
 > mybatis内真正起作用对象.
-![](./4.png)
+![]({{site.url}}/assets/image/opinion/4.png)
+
 - SimpleExecutor
 ```
     @Override
@@ -49,8 +51,9 @@ MyBatis的缓存分为一级缓存和二级缓存，两种缓存的缓存粒度�
 > BatchExecutor 主要是把不同的Statement以及参数值缓存起来
 
 ### Cache
+
 Cache： MyBatis中的Cache接口，提供了和缓存相关的最基本的操作.使用装饰器模式
-![](./5.jpg)
+![]({{site.url}}/assets/image/opinion/5.jpg)
 
 PerpetualCache
 ```java
@@ -58,11 +61,12 @@ PerpetualCache
 ```
 
 ## 一级缓存
-![](./1.jpg)
 
-![](./2.png)
+![]({{site.url}}/assets/image/opinion/1.jpg)
 
-![](./3.png)
+![]({{site.url}}/assets/image/opinion/2.jpg)
+
+![]({{site.url}}/assets/image/opinion/3.jpg)
 
 BaseExcuter.java
 ```java
@@ -121,7 +125,9 @@ BaseExcuter.java
   }
 
 ```
+
 ## 总结
+
 - MyBatis一级缓存的生命周期和SqlSession一致。
 
 - MyBatis一级缓存内部设计简单，只是一个没有容量限定的HashMap，在缓存的功能性上有所欠缺。
@@ -129,18 +135,22 @@ BaseExcuter.java
 - MyBatis的一级缓存最大范围是SqlSession内部，有多个SqlSession或者分布式的环境下，数据库写操作会引起脏数据，建议设定缓存级别为Statement。
 
 ## 二级缓存
+
 > MyBatis二级缓存的工作流程和前文提到的一级缓存类似，只是在一级缓存处理前，用CachingExecutor装饰了BaseExecutor的子类，在委托具体职责给delegate之前，实现了二级缓存的查询和写入功能
-![](./7.png)
-!
+![]({{site.url}}/assets/image/opinion/7.png)
+
 ### 配置
+
 ```
 <setting name="cacheEnabled"value="true"/>
 ```
 
 ### Executor 
-![](./6.png)
+
+![]({{site.url}}/assets/image/opinion/6.png)
 
 ### 核心代码
+
 ```java
   private final Executor delegate;
   //二级缓存
@@ -184,16 +194,19 @@ BaseExcuter.java
 
 
 ### Hibernate
-> Hibernate一级缓存是内置的，不能被卸载（不能被卸载的意思就是这种缓存不具有可选性，必须有的功能，不可以取消Session缓存，也是Hibernate缓存机制默认的缓存。在一级缓存中，持久化类的每个实例都具有唯一的OID。
 
+> Hibernate一级缓存是内置的，不能被卸载（不能被卸载的意思就是这种缓存不具有可选性，必须有的功能，不可以取消Session缓存，也是Hibernate缓存机制默认的缓存。在一级缓存中，持久化类的每个实例都具有唯一的OID。
 
 ## mybaits默认SESSION缓存带来的问题
 ### 列举
+
 - 分表情况下,采用相同的查询语句及其查询条件，所以在到达分表逻辑之前就已经命中缓存，提前返回,造成数据不一致
 - 在分布式环境下，由于默认的MyBatis Cache实现都是基于本地的，分布式环境下必然会出现读取到脏数据
 
 ### 解决方案
+
 - 只把mybaits当orm框架使用,关闭一级缓存
+
 ```
 <!-- 关闭懒加载-->
 <setting name="lazyLoadingEnabled" value="false" />
@@ -202,5 +215,6 @@ BaseExcuter.java
 <!-- 缓存作用域为STATEMENT-->
 <setting name="localCacheScope" value="STATEMENT" />
 ```
+
 - 读与写都放在同一个锁里面即可。例如我从读数据开始即上锁，然后更新或者插入的实务提交之后，才释放锁，别的线程才可以做读写操作
 - mybatis cache plugin(
