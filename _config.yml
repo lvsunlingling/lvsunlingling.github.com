@@ -3,7 +3,7 @@ title: newcome personal blog
 email: lkbycn1998@gmail.com
 description: > #刘康的技术博客
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "https://almostlie.github.io/" # the base hostname & protocol for your site
+url: "https://lvsunlingling.github.io/" # the base hostname & protocol for your site
 # url: "http://127.0.0.1:4000" # the base hostname & protocol for your site
 github_username:  almostlie
 
