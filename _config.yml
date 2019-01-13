@@ -14,7 +14,7 @@ paginate: 10                                #分页时每页博文数量
 author:                                     #自定义常亮
   name: newcome
   email: lkbycn1998@gmail.com
-  link: https://almostlie.github.io/
+  link: https://lvsunlingling.github.io/
   github: https://github.com/almostlie
 title:  newcome personal blog                            
 
